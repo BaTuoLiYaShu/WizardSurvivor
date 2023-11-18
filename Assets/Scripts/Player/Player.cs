@@ -79,6 +79,7 @@ public class Player : MonoBehaviour
         EventHandler.AddMaxHeartEvent += AtAddMaxHeartEvent;
         EventHandler.MoveToPositionEvent += AtMoveToPositionEvent;
         EventHandler.StartNewGameEvent += AtStartNewGameEvent;
+        EventHandler.AfterSceneLoadedEvent += AtAfterSceneLoadedEvent;
     }
 
     private void OnDisable()
@@ -88,6 +89,7 @@ public class Player : MonoBehaviour
         EventHandler.AddMaxHeartEvent -= AtAddMaxHeartEvent;
         EventHandler.MoveToPositionEvent -= AtMoveToPositionEvent;
         EventHandler.StartNewGameEvent -= AtStartNewGameEvent;
+        EventHandler.AfterSceneLoadedEvent -= AtAfterSceneLoadedEvent;
     }
 
     #region 事件
@@ -145,6 +147,12 @@ public class Player : MonoBehaviour
         gun.GetComponent<Gun>().isFiring = false;
         gun.transform.gameObject.SetActive(true);
     }
+    
+    private void AtAfterSceneLoadedEvent()
+    {
+        transform.position = new Vector3(0, 0, 0);
+    }
+    
     #endregion
     
     private void PlayerMovementInput()
